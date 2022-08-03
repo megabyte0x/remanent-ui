@@ -12,3 +12,16 @@ export enum Network {
     ETHEREUM = 1,
     POLYGON = 137,
 }
+
+export enum View {
+    NFTs,
+    DAOs,
+}
+
+export enum NFT_API {
+    NFTs,
+    Collections,
+    Transactions,
+}
+
+export enum DAO_API {}

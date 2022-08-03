@@ -1,14 +1,20 @@
-import React from "react";
+import { Dispatch, SetStateAction } from "react";
 import { useAddressContext } from "../contexts/Address";
 import { useNetworkContext } from "../contexts/Network";
-import { Network } from "../types/enums";
+import { DAO_API, Network, NFT_API, View } from "../types/enums";
 import DropDown from "./DropDown";
 import TextField from "./TextField";
 
-type Props = {};
+type Props = {
+    view: View;
+    api: NFT_API | DAO_API;
+    setView: Dispatch<SetStateAction<View>>;
+    setApi: Dispatch<SetStateAction<NFT_API | DAO_API>>;
+    handleUpdateData: () => void;
+};
 
-const LeftPane = (props: Props) => {
-    const { network, setNetwork } = useNetworkContext();
+const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
+    const { setNetwork } = useNetworkContext();
     const { address, setAddress } = useAddressContext();
     return (
         <>
@@ -16,54 +22,66 @@ const LeftPane = (props: Props) => {
             <div className="fixed col-span-1 flex h-screen flex-col justify-center bg-teal-400 px-12">
                 <section className="mb-10 flex justify-center">
                     <div className="flex w-min items-center space-x-2">
-                        <button
-                            className="block rounded-xl border-2 border-gray-600 p-4 font-semibold outline-none"
-                            type="button"
-                        >
-                            NFTs
-                        </button>
-
-                        <button
-                            className="block rounded-xl border-2 border-transparent p-4 outline-none"
-                            type="button"
-                        >
-                            DAOs
-                        </button>
+                        {Object.keys(View)
+                            .filter((v) => isNaN(Number(v)))
+                            .map((view_, index) => {
+                                return (
+                                    <button
+                                        className={
+                                            View[view] == View[index]
+                                                ? "block rounded-xl border-2 border-gray-600 p-4 font-semibold outline-none"
+                                                : "block rounded-xl border-2 border-transparent p-4 outline-none"
+                                        }
+                                        type="button"
+                                        key={index}
+                                        onClick={() => {
+                                            setView(
+                                                View[
+                                                    view_ as unknown as View
+                                                ] as unknown as View
+                                            );
+                                        }}
+                                    >
+                                        {view_}
+                                    </button>
+                                );
+                            })}
                     </div>
                 </section>
                 <section className="mx-20 mb-20">
-                    <ul className="flex border-b-2 border-transparent">
-                        <li className="flex-1 cursor-pointer">
-                            <div className="relative block p-4">
-                                <span className="absolute inset-x-0 -bottom-px h-[2px] w-full bg-gray-600"></span>
-                                <div className="flex items-center justify-center">
-                                    <span className="ml-3 text-sm font-medium">
-                                        NFTs
-                                    </span>
-                                </div>
-                            </div>
-                        </li>
-                        <li className="flex-1 cursor-pointer">
-                            <div className="relative block p-4">
-                                <div className="flex items-center justify-center">
-                                    <span className="ml-3 text-sm font-medium">
-                                        Collections
-                                    </span>
-                                </div>
-                            </div>
-                        </li>
-                        <li className="flex-1 cursor-pointer">
-                            <div className="relative block p-4">
-                                <div className="flex items-center justify-center">
-                                    <span className="ml-3 text-sm font-medium">
-                                        Transactions
-                                    </span>
-                                </div>
-                            </div>
-                        </li>
+                    <ul className="flex gap-2 border-b-2 border-transparent">
+                        {Object.keys(NFT_API)
+                            .filter((v) => isNaN(Number(v)))
+                            .map((api_, index) => {
+                                return (
+                                    <li
+                                        className="flex-1 cursor-pointer"
+                                        key={index}
+                                        onClick={() =>
+                                            setApi(
+                                                NFT_API[
+                                                    api_ as unknown as NFT_API
+                                                ] as unknown as NFT_API
+                                            )
+                                        }
+                                    >
+                                        <div className="relative block p-4">
+                                            {NFT_API[
+                                                api as unknown as NFT_API
+                                            ] == NFT_API[index] && (
+                                                <span className="absolute inset-x-0 -bottom-px h-[2px] w-full bg-gray-600"></span>
+                                            )}
+                                            <div className="flex items-center justify-center">
+                                                <span className="text-sm font-medium">
+                                                    {api_}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                );
+                            })}
                     </ul>
                 </section>
-                {/*  */}
                 <div className="flex flex-col gap-5">
                     <div className="flex gap-2">
                         <DropDown
@@ -97,7 +115,8 @@ const LeftPane = (props: Props) => {
                         />
                     </div>
                     <button
-                        type="submit"
+                        type="button"
+                        onClick={handleUpdateData}
                         className="group inline-flex items-center justify-center rounded border border-gray-700 bg-gray-700 px-8 py-3 text-teal-50 outline-none"
                     >
                         <span className="text-sm font-medium">Search</span>

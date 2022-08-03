@@ -1,25 +1,22 @@
-/* eslint-disable @next/next/no-img-element */
-type Props = {};
+import { NFT } from "../types/NFT";
 
-const NFTCard = (props: Props) => {
+/* eslint-disable @next/next/no-img-element */
+type Props = { nft: NFT };
+
+const NFTCard = ({ nft }: Props) => {
     return (
         <div className="group block cursor-pointer" role="NFT Card">
-            <div className="relative overflow-hidden rounded-md object-contain">
+            <div className="relative flex w-full justify-center overflow-hidden rounded-md object-contain">
                 <img
-                    className="transition-transform duration-500 ease-in-out group-hover:scale-110"
-                    src="https://www.hyperui.dev/photos/university-1.jpeg"
-                    alt=""
+                    className="h-full w-full transition-transform duration-300 ease-in-out group-hover:scale-110"
+                    src={nft.associated_url}
+                    alt={nft.name}
                 />
             </div>
 
-            <div className="p-4">
-                <h5 className="text-xl font-bold">
-                    Finding the Journey to Mordor
-                </h5>
-                <p className="mt-2 text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Ipsa libero labore natus atque, ducimus sed.
-                </p>
+            <div className="px-2 pt-2 pb-4">
+                <h5 className="text-xl font-bold">{nft.name}</h5>
+                <p className="mt-2 text-gray-500">{nft.description}</p>
             </div>
         </div>
     );
