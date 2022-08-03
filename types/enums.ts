@@ -24,4 +24,9 @@ export enum NFT_API {
     Transactions,
 }
 
-export enum DAO_API {}
+export enum DAO_API {
+    Members,
+    Transactions,
+    Tokens,
+    Votes,
+}

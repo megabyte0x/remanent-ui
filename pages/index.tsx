@@ -18,11 +18,22 @@ import CollectionCard from "../components/CollectionCard";
 
 const Empty = () => {
     return (
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-5">
             <img src="./empty.svg" alt="Empty" className="h-96 w-96" />
+            <span>No records found</span>
         </div>
     );
 };
+
+const UC = () => {
+    return (
+        <div className="flex h-full w-full flex-col items-center justify-center gap-5">
+            <img src="./build.svg" alt="Empty" className="h-96 w-96" />
+            <span>Under Construction</span>
+        </div>
+    );
+};
+
 const NFTs_NFTs = ({ nfts }: { nfts: NFT[] }) => {
     // return (
     //     <div className="grid grid-cols-3 gap-x-6 gap-y-8">
@@ -37,21 +48,21 @@ const NFTs_NFTs = ({ nfts }: { nfts: NFT[] }) => {
     return (
         <div className="container m-auto">
             <div className="flex flex-row space-x-8">
-                <div className="mt-16 flex w-full flex-col space-y-4">
+                <div className="mt-16 flex w-full flex-col space-y-6">
                     {nfts
                         .filter((_, index) => index % 3 == 0)
                         .map((nft, index) => {
                             return <NFTCard key={index} nft={nft} />;
                         })}
                 </div>
-                <div className="flex w-full flex-col space-y-4">
+                <div className="flex w-full flex-col space-y-6">
                     {nfts
                         .filter((_, index) => index % 3 == 2)
                         .map((nft, index) => {
                             return <NFTCard key={index} nft={nft} />;
                         })}
                 </div>
-                <div className="mt-10 flex w-full flex-col space-y-4">
+                <div className="mt-10 flex w-full flex-col space-y-6">
                     {nfts
                         .filter((_, index) => index % 3 == 1)
                         .map((nft, index) => {
@@ -132,7 +143,7 @@ const Home: NextPage = () => {
                             );
                     }
                 case View.DAOs:
-                    break;
+                    return <UC />;
             }
     };
 
@@ -189,7 +200,7 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head> */}
 
-            <main className="grid grid-cols-3 gap-x-5">
+            <main className="relative grid grid-cols-3 gap-x-5">
                 <LeftPane
                     view={view}
                     api={api}

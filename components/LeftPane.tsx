@@ -18,8 +18,8 @@ const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
     const { address, setAddress } = useAddressContext();
     return (
         <>
-            <div className="col-span-1"></div>
-            <div className="fixed col-span-1 flex h-screen flex-col justify-center bg-teal-400 px-12">
+            <div className="col-span-1 w-full"></div>
+            <div className="fixed flex h-screen w-[31%] flex-col justify-center bg-teal-400 px-12">
                 <section className="mb-10 flex justify-center">
                     <div className="flex w-min items-center space-x-2">
                         {Object.keys(View)
@@ -50,36 +50,68 @@ const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
                 </section>
                 <section className="mx-20 mb-20">
                     <ul className="flex gap-2 border-b-2 border-transparent">
-                        {Object.keys(NFT_API)
-                            .filter((v) => isNaN(Number(v)))
-                            .map((api_, index) => {
-                                return (
-                                    <li
-                                        className="flex-1 cursor-pointer"
-                                        key={index}
-                                        onClick={() =>
-                                            setApi(
-                                                NFT_API[
-                                                    api_ as unknown as NFT_API
-                                                ] as unknown as NFT_API
-                                            )
-                                        }
-                                    >
-                                        <div className="relative block p-4">
-                                            {NFT_API[
-                                                api as unknown as NFT_API
-                                            ] == NFT_API[index] && (
-                                                <span className="absolute inset-x-0 -bottom-px h-[2px] w-full bg-gray-600"></span>
-                                            )}
-                                            <div className="flex items-center justify-center">
-                                                <span className="text-sm font-medium">
-                                                    {api_}
-                                                </span>
+                        {view == View.NFTs &&
+                            Object.keys(NFT_API)
+                                .filter((v) => isNaN(Number(v)))
+                                .map((api_, index) => {
+                                    return (
+                                        <li
+                                            className="flex-1 cursor-pointer"
+                                            key={index}
+                                            onClick={() =>
+                                                setApi(
+                                                    NFT_API[
+                                                        api_ as unknown as NFT_API
+                                                    ] as unknown as NFT_API
+                                                )
+                                            }
+                                        >
+                                            <div className="relative block p-4">
+                                                {NFT_API[
+                                                    api as unknown as NFT_API
+                                                ] == NFT_API[index] && (
+                                                    <span className="absolute inset-x-0 -bottom-px h-[2px] w-full bg-gray-600"></span>
+                                                )}
+                                                <div className="flex items-center justify-center">
+                                                    <span className="text-sm font-medium">
+                                                        {api_}
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                );
-                            })}
+                                        </li>
+                                    );
+                                })}
+                        {view == View.DAOs &&
+                            Object.keys(DAO_API)
+                                .filter((v) => isNaN(Number(v)))
+                                .map((api_, index) => {
+                                    return (
+                                        <li
+                                            className="flex-1 cursor-pointer"
+                                            key={index}
+                                            onClick={() =>
+                                                setApi(
+                                                    DAO_API[
+                                                        api_ as unknown as DAO_API
+                                                    ] as unknown as DAO_API
+                                                )
+                                            }
+                                        >
+                                            <div className="relative block p-4">
+                                                {DAO_API[
+                                                    api as unknown as DAO_API
+                                                ] == DAO_API[index] && (
+                                                    <span className="absolute inset-x-0 -bottom-px h-[2px] w-full bg-gray-600"></span>
+                                                )}
+                                                <div className="flex items-center justify-center">
+                                                    <span className="text-sm font-medium">
+                                                        {api_}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    );
+                                })}
                     </ul>
                 </section>
                 <div className="flex flex-col gap-5">

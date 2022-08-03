@@ -23,8 +23,7 @@ const TransactionCard = ({ transaction }: Props) => {
             <div className="flex w-min justify-between gap-3 font-mono text-sm">
                 <span
                     className={
-                        address.toLowerCase() ==
-                        transaction.sender.toLowerCase()
+                        processAddress(transaction.sender) == "owner"
                             ? "font-semibold text-teal-600"
                             : ""
                     }
@@ -47,8 +46,7 @@ const TransactionCard = ({ transaction }: Props) => {
                 </svg>
                 <span
                     className={
-                        address.toLowerCase() ==
-                        transaction.receivers.toLowerCase()
+                        processAddress(transaction.receivers) == "owner"
                             ? "font-semibold text-teal-600"
                             : ""
                     }
