@@ -68,12 +68,26 @@ const Home: NextPage = () => {
                             </li>
                         </ul>
                     </section>
-                    <section className="flex flex-col gap-5">
+                    {/*  */}
+                    <form
+                        className="flex flex-col gap-5"
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                        }}
+                    >
                         <div className="flex gap-2">
                             <DropDown />
-                            <TextField />
+                            <TextField
+                                label="Ethereum Address"
+                                htmlFor="Ethereum Address"
+                                placeholder="Ethereum Address"
+                                span="0x"
+                            />
                         </div>
-                        <button className="group inline-flex items-center justify-center rounded border border-gray-700 bg-gray-700 px-8 py-3 text-teal-50 outline-none">
+                        <button
+                            type="submit"
+                            className="group inline-flex items-center justify-center rounded border border-gray-700 bg-gray-700 px-8 py-3 text-teal-50 outline-none"
+                        >
                             <span className="text-sm font-medium">Search</span>
                             <svg
                                 className="ml-3 h-5 w-5 transition ease-in-out group-hover:translate-x-3"
@@ -90,7 +104,7 @@ const Home: NextPage = () => {
                                 />
                             </svg>
                         </button>
-                    </section>
+                    </form>
 
                     {/* <footer></footer> */}
                 </div>
