@@ -8,7 +8,7 @@ import NetworkContext from "../contexts/Network";
 
 function MyApp({ Component, pageProps }: AppProps) {
     const [address, setAddress] = useState(
-        "0xdbfd76af2157dc15ee4e57f3f942bb45ba84af24"
+        "0xDBfD76AF2157Dc15eE4e57F3f942bB45Ba84aF24"
     );
     const [network, setNetwork] = useState(Network.ETHEREUM);
     const [loading, setLoading] = useState(false);

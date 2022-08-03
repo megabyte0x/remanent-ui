@@ -13,6 +13,8 @@ import { useAddressContext } from "../contexts/Address";
 import { Collection } from "../types/Collection";
 import { Transaction } from "../types/Transation";
 import { useLoadingContext } from "../contexts/Loading";
+import TransactionCard from "../components/TransactionCard";
+import CollectionCard from "../components/CollectionCard";
 
 const Empty = () => {
     return (
@@ -62,7 +64,13 @@ const NFTs_NFTs = ({ nfts }: { nfts: NFT[] }) => {
 };
 
 const NFTs_Collections = ({ collections }: { collections: Collection[] }) => {
-    return <div className="grid grid-cols-3 gap-x-6 gap-y-8"></div>;
+    return (
+        <div className="grid grid-cols-3 gap-x-6 gap-y-8">
+            {collections.map((collection, index) => {
+                return <CollectionCard collection={collection} key={index} />;
+            })}
+        </div>
+    );
 };
 
 const NFTs_Transactions = ({
@@ -70,7 +78,15 @@ const NFTs_Transactions = ({
 }: {
     transactions: Transaction[];
 }) => {
-    return <div className="grid grid-cols-3 gap-x-6 gap-y-8"></div>;
+    return (
+        <div className="flex flex-col">
+            {transactions.map((transaction, index) => {
+                return (
+                    <TransactionCard key={index} transaction={transaction} />
+                );
+            })}
+        </div>
+    );
 };
 
 // const DAOs_ = () => {
