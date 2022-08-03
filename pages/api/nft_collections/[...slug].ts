@@ -5,7 +5,7 @@ import { Collection } from "../../../types/Collection";
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<[Collection]>
+    res: NextApiResponse<Collection[]>
 ) {
     const { slug } = req.query;
     // to handle slug not found
@@ -26,7 +26,7 @@ export default async function handler(
         "https://remanent-api.vercel.app/v1/web3/nft_collections";
     const url = `${API_ENDPOINT}/${chainId}/${contractAddr}`;
 
-    const collections = (await (await axios.get(url)).data) as [Collection];
+    const collections = (await (await axios.get(url)).data) as Collection[];
 
     res.status(200).json(collections);
 }

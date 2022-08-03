@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<[NFT]>
+    res: NextApiResponse<NFT[]>
 ) {
     const { slug } = req.query;
     // to handle slug not found
@@ -25,7 +25,7 @@ export default async function handler(
     const API_ENDPOINT = "https://remanent-api.vercel.app/v1/web3/nfts";
     const url = `${API_ENDPOINT}/${chainId}/${ownerAddr}`;
 
-    const nfts = (await (await axios.get(url)).data) as [NFT];
+    const nfts = (await (await axios.get(url)).data) as NFT[];
 
     res.status(200).json(nfts);
 }

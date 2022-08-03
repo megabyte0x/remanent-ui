@@ -18,9 +18,9 @@ export type Collection = {
     description: string;
     logo_url: string;
     banner_url: string;
-    creators: [string];
-    editors: [string];
-    owners: [string];
+    creators: string[];
+    editors: string[];
+    owners: string[];
     stats: {
         volume: string;
         marketcap: string;

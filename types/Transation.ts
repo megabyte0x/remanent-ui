@@ -12,7 +12,7 @@ export type Transaction = {
         mints: number;
     };
     sender: string;
-    creator: [string];
+    creator: string[];
     receivers: string;
     marketplace: string;
     price: string;

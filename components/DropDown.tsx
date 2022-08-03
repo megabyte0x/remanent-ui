@@ -1,10 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
+import { useNetworkContext } from "../contexts/Network";
 
-type Props = {};
+type Props = {
+    menuOptions: {
+        item: string;
+        symbol: string;
+        class?: string;
+        attribute?: any;
+    }[];
+    defaultSelected: number;
+    setState: (state: any) => void;
+};
 
-const DropDown = (props: Props) => {
+const DropDown = ({ menuOptions, defaultSelected, setState }: Props) => {
     const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState(defaultSelected);
     return (
         <div
             className="inline-flex cursor-pointer items-stretch rounded border-2 border-transparent bg-teal-50 focus-within:border-gray-600"
@@ -15,10 +26,18 @@ const DropDown = (props: Props) => {
             <div className="relative">
                 <button
                     type="button"
-                    className="inline-flex h-full items-center justify-center rounded-r px-2 hover:text-gray-700"
+                    className="flex h-full w-full items-center justify-center gap-3 rounded-r px-2 hover:text-gray-700"
                 >
-                    <div className="flex items-center rounded-l px-4 py-2 text-center text-sm hover:text-gray-700">
-                        <span>Network</span>
+                    <div className="flex h-10 w-8 items-center justify-center rounded-l">
+                        <img
+                            src={menuOptions[selected].symbol}
+                            alt={menuOptions[selected].item}
+                            className={
+                                menuOptions[selected].class
+                                    ? menuOptions[selected].class
+                                    : "h-6"
+                            }
+                        />
                     </div>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -40,29 +59,26 @@ const DropDown = (props: Props) => {
                         role="menu"
                     >
                         <div className="p-2">
-                            <span
-                                className="flex cursor-pointer items-center justify-between rounded px-4 py-2 text-sm hover:bg-teal-400 hover:font-medium"
-                                role="menuitem"
-                            >
-                                <img
-                                    src="/ethereum.svg"
-                                    alt="ethereum logo"
-                                    className="h-6"
-                                />
-                                Ethereum
-                            </span>
-
-                            <span
-                                className="flex cursor-pointer items-center justify-between rounded px-4 py-2 text-sm hover:bg-teal-400 hover:font-medium"
-                                role="menuitem"
-                            >
-                                <img
-                                    src="/polygon-matic.svg"
-                                    alt="polygon logo"
-                                    className="h-5"
-                                />
-                                Polygon
-                            </span>
+                            {menuOptions.map((opt, index) => (
+                                <span
+                                    className="flex cursor-pointer items-center justify-between rounded px-4 py-2 text-sm hover:bg-teal-400 hover:font-medium"
+                                    role="menuitem"
+                                    key={index}
+                                    onClick={() => {
+                                        setSelected(index);
+                                        setState(opt.attribute);
+                                    }}
+                                >
+                                    <img
+                                        src={opt.symbol}
+                                        alt={opt.item}
+                                        className={
+                                            opt.class ? opt.class : "h-6"
+                                        }
+                                    />
+                                    {opt.item}
+                                </span>
+                            ))}
                         </div>
                     </div>
                 )}

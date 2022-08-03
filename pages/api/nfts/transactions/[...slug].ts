@@ -5,7 +5,7 @@ import { Transaction } from "../../../../types/Transation";
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<[Transaction]>
+    res: NextApiResponse<Transaction[]>
 ) {
     const { slug } = req.query;
     // to handle slug not found
@@ -26,7 +26,7 @@ export default async function handler(
         "https://remanent-api.vercel.app/v1/web3/nfts/transactions";
     const url = `${API_ENDPOINT}/${chainId}/${ownerAdd}`;
 
-    const transactions = (await (await axios.get(url)).data) as [Transaction];
+    const transactions = (await (await axios.get(url)).data) as Transaction[];
 
     res.status(200).json(transactions);
 }

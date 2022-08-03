@@ -1,10 +1,15 @@
 import React from "react";
+import { useAddressContext } from "../contexts/Address";
+import { useNetworkContext } from "../contexts/Network";
+import { Network } from "../types/enums";
 import DropDown from "./DropDown";
 import TextField from "./TextField";
 
 type Props = {};
 
 const LeftPane = (props: Props) => {
+    const { network, setNetwork } = useNetworkContext();
+    const { address, setAddress } = useAddressContext();
     return (
         <>
             <div className="col-span-1"></div>
@@ -59,19 +64,36 @@ const LeftPane = (props: Props) => {
                     </ul>
                 </section>
                 {/*  */}
-                <form
-                    className="flex flex-col gap-5"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                    }}
-                >
+                <div className="flex flex-col gap-5">
                     <div className="flex gap-2">
-                        <DropDown />
+                        <DropDown
+                            menuOptions={[
+                                {
+                                    item: "Ethereum",
+                                    symbol: "./ethereum.svg",
+                                    attribute: Network.ETHEREUM,
+                                },
+                                {
+                                    item: "Polygon",
+                                    symbol: "./polygon-matic.svg",
+                                    class: "h-5",
+                                    attribute: Network.POLYGON,
+                                },
+                            ]}
+                            defaultSelected={0}
+                            setState={setNetwork}
+                        />
                         <TextField
                             label="Ethereum Address"
+                            name="eth_addr"
                             htmlFor="Ethereum Address"
                             placeholder="Ethereum Address"
                             span="0x"
+                            value={address}
+                            onChange={(e) => {
+                                console.log(e.target.value);
+                                setAddress(e.target.value);
+                            }}
                         />
                     </div>
                     <button
@@ -94,7 +116,7 @@ const LeftPane = (props: Props) => {
                             />
                         </svg>
                     </button>
-                </form>
+                </div>
 
                 {/* <footer></footer> */}
             </div>

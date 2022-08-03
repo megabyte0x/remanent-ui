@@ -1,10 +1,12 @@
 import { createContext, useContext } from "react";
 
-const AddressContext = createContext<string>("");
+const AddressContext = createContext<{
+    address: string;
+    setAddress: (address: string) => void;
+}>({ address: "", setAddress: () => {} });
 
 export function useAddressContext() {
-    const address = useContext(AddressContext);
-    return address;
+    return useContext(AddressContext);
 }
 
 export default AddressContext;

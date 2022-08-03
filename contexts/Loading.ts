@@ -1,10 +1,15 @@
 import { createContext, useContext } from "react";
 
-const LoadingContext = createContext<Boolean>(true);
+const LoadingContext = createContext<{
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
+}>({
+    loading: true,
+    setLoading: () => {},
+});
 
 export function useLoadingContext() {
-    const loading = useContext(LoadingContext);
-    return loading;
+    return useContext(LoadingContext);
 }
 
 export default LoadingContext;

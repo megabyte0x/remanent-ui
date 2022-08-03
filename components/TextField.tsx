@@ -1,11 +1,24 @@
+import { ChangeEventHandler } from "react";
+
 type Props = {
     label: string;
+    name: string;
     htmlFor: string;
     placeholder: string;
     span: string;
+    value: string;
+    onChange: ChangeEventHandler<HTMLInputElement> | undefined;
 };
 
-const TextField = ({ label, htmlFor, placeholder, span }: Props) => {
+const TextField = ({
+    label,
+    name,
+    htmlFor,
+    placeholder,
+    span,
+    value,
+    onChange,
+}: Props) => {
     return (
         <div className="relative w-full">
             <label className="sr-only" htmlFor={htmlFor}>
@@ -17,6 +30,9 @@ const TextField = ({ label, htmlFor, placeholder, span }: Props) => {
                 autoComplete="off"
                 id={label}
                 placeholder={placeholder}
+                name={name}
+                value={value}
+                onChange={onChange}
             />
 
             <span className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 font-mono text-sm font-bold text-gray-400">
