@@ -13,7 +13,6 @@ export default async function handler(
         res.status(400);
         return;
     }
-
     const chainId = slug[0];
     const ownerAddr = slug[1];
     // to handle undefined chainId or ownerAddr
@@ -21,11 +20,13 @@ export default async function handler(
         res.status(400);
         return;
     }
-
     const API_ENDPOINT = "https://remanent-api.vercel.app/v1/web3/nfts";
     const url = `${API_ENDPOINT}/${chainId}/${ownerAddr}`;
 
-    const nfts = (await (await axios.get(url)).data) as NFT[];
-
-    res.status(200).json(nfts);
+    try {
+        const nfts = (await (await axios.get(url)).data) as NFT[];
+        res.status(200).json(nfts);
+    } catch (error) {
+        res.status(400);
+    }
 }

@@ -27,12 +27,12 @@ export type Collection = {
         floor_price: string;
         currency: string;
     };
-    traits: [Trait];
+    traits: Trait[];
     status: NFTStatus;
-    marketplaces: [Marketplace];
+    marketplaces: Marketplace[];
     royalty: {
         percentage: string;
         address: string;
     };
-    assets: [Asset];
+    assets: Asset[];
 };

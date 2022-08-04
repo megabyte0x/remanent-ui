@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import type { NextPage } from "next";
 import Head from "next/head";
 import { ReactNode, useEffect, useState } from "react";
 import LeftPane from "../components/LeftPane";
-import NFTCard from "../components/NFTCard";
 import RightPane from "../components/RightPane";
 import { View, NFT_API, DAO_API } from "../types/enums";
 import { NFT } from "../types/NFT";
@@ -13,96 +13,11 @@ import { useAddressContext } from "../contexts/Address";
 import { Collection } from "../types/Collection";
 import { Transaction } from "../types/Transation";
 import { useLoadingContext } from "../contexts/Loading";
-import TransactionCard from "../components/TransactionCard";
-import CollectionCard from "../components/CollectionCard";
-
-const Empty = () => {
-    return (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-5">
-            <img src="./empty.svg" alt="Empty" className="h-96 w-96" />
-            <span>No records found</span>
-        </div>
-    );
-};
-
-const UC = () => {
-    return (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-5">
-            <img src="./build.svg" alt="Empty" className="h-96 w-96" />
-            <span>Under Construction</span>
-        </div>
-    );
-};
-
-const NFTs_NFTs = ({ nfts }: { nfts: NFT[] }) => {
-    // return (
-    //     <div className="grid grid-cols-3 gap-x-6 gap-y-8">
-    //         {nfts.map((nft, index) => {
-    //             return <NFTCard key={index} nft={nft} />;
-    //         })}
-    //     </div>
-    // );
-    nfts = nfts.filter((nft) => {
-        return nft.name;
-    });
-    return (
-        <div className="container m-auto">
-            <div className="flex flex-row space-x-8">
-                <div className="mt-16 flex w-full flex-col space-y-6">
-                    {nfts
-                        .filter((_, index) => index % 3 == 0)
-                        .map((nft, index) => {
-                            return <NFTCard key={index} nft={nft} />;
-                        })}
-                </div>
-                <div className="flex w-full flex-col space-y-6">
-                    {nfts
-                        .filter((_, index) => index % 3 == 2)
-                        .map((nft, index) => {
-                            return <NFTCard key={index} nft={nft} />;
-                        })}
-                </div>
-                <div className="mt-10 flex w-full flex-col space-y-6">
-                    {nfts
-                        .filter((_, index) => index % 3 == 1)
-                        .map((nft, index) => {
-                            return <NFTCard key={index} nft={nft} />;
-                        })}
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const NFTs_Collections = ({ collections }: { collections: Collection[] }) => {
-    return (
-        <div className="grid grid-cols-3 gap-x-6 gap-y-8">
-            {collections.map((collection, index) => {
-                return <CollectionCard collection={collection} key={index} />;
-            })}
-        </div>
-    );
-};
-
-const NFTs_Transactions = ({
-    transactions,
-}: {
-    transactions: Transaction[];
-}) => {
-    return (
-        <div className="flex flex-col">
-            {transactions.map((transaction, index) => {
-                return (
-                    <TransactionCard key={index} transaction={transaction} />
-                );
-            })}
-        </div>
-    );
-};
-
-// const DAOs_ = () => {
-//     return <div className="grid grid-cols-3 gap-x-6 gap-y-8"></div>;
-// };
+import NFTs_Collections from "../components/Views/NFTs_Collections";
+import NFTs_NFTs from "../components/Views/NFTs_NFTs";
+import NFTs_Transactions from "../components/Views/NFTs_Transactions";
+import Empty from "../components/Views/Empty";
+import UC from "../components/Views/UC";
 
 const Home: NextPage = () => {
     const { network } = useNetworkContext();
@@ -151,7 +66,6 @@ const Home: NextPage = () => {
         const data = (await (
             await axios.get(`/api/nfts/${network}/${address}`)
         ).data) as NFT[];
-        console.log(data);
         setNfts(data);
     };
 
@@ -159,7 +73,6 @@ const Home: NextPage = () => {
         const data = await (
             await axios.get(`/api/nft_collections/${network}/${address}`)
         ).data;
-        console.log(data);
         setCollections(data);
     };
 
@@ -167,7 +80,6 @@ const Home: NextPage = () => {
         const data = await (
             await axios.get(`/api/nfts/transactions/${network}/${address}`)
         ).data;
-        console.log(data);
         setTransactions(data);
     };
 
@@ -182,7 +94,7 @@ const Home: NextPage = () => {
     };
 
     useEffect(() => {
-        updateData();
+        if (!loading) updateData();
     }, []);
 
     useEffect(() => {
@@ -190,7 +102,7 @@ const Home: NextPage = () => {
     }, [view, api, nfts, collections, transactions]);
 
     return (
-        <div className="bg-teal-50 text-gray-900">
+        <div className="relative bg-teal-50 text-gray-900">
             {/* <Head>
                 <title>Create Next App</title>
                 <meta
@@ -200,7 +112,7 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head> */}
 
-            <main className="relative grid grid-cols-3 gap-x-5">
+            <main className="grid grid-cols-3">
                 <LeftPane
                     view={view}
                     api={api}

@@ -40,6 +40,7 @@ const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
                                                     view_ as unknown as View
                                                 ] as unknown as View
                                             );
+                                            window.scroll({ top: 0 });
                                         }}
                                     >
                                         {view_}
@@ -58,13 +59,14 @@ const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
                                         <li
                                             className="flex-1 cursor-pointer"
                                             key={index}
-                                            onClick={() =>
+                                            onClick={() => {
                                                 setApi(
                                                     NFT_API[
                                                         api_ as unknown as NFT_API
                                                     ] as unknown as NFT_API
-                                                )
-                                            }
+                                                );
+                                                window.scroll({ top: 0 });
+                                            }}
                                         >
                                             <div className="relative block p-4">
                                                 {NFT_API[
@@ -141,7 +143,6 @@ const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
                             span="0x"
                             value={address}
                             onChange={(e) => {
-                                console.log(e.target.value);
                                 setAddress(e.target.value);
                             }}
                         />

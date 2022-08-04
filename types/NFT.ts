@@ -18,7 +18,7 @@ export type NFT = {
     };
     owners: string[];
     creators: string[];
-    traits: [Trait];
+    traits: Trait[];
     status: NFTStatus;
     volume: string;
     volume_currency: string;

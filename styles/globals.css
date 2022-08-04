@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
-    div {
+@layer base {
+    /* div {
         @apply no-scrollbar;
     }
     section {
@@ -15,8 +15,11 @@
     body {
         @apply select-none;
         @apply no-scrollbar;
+    } */
+    html {
+        @apply scroll-smooth;
     }
-} */
+}
 
 /* @layer utilities {
     Chrome, Safari and Opera
