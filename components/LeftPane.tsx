@@ -17,10 +17,9 @@ const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
     const { setNetwork } = useNetworkContext();
     const { address, setAddress } = useAddressContext();
     return (
-        <>
-            <div className="col-span-1 w-full"></div>
-            <div className="fixed flex h-screen w-[31%] flex-col justify-center bg-teal-400 px-12">
-                <section className="mb-10 flex justify-center">
+        <section className="col-span-1 bg-teal-400 px-3 lg:px-8 xl:px-5 2xl:px-12">
+            <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center">
+                <div className="mb-10 flex w-full justify-center">
                     <div className="flex w-min items-center space-x-2">
                         {Object.keys(View)
                             .filter((v) => isNaN(Number(v)))
@@ -48,8 +47,8 @@ const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
                                 );
                             })}
                     </div>
-                </section>
-                <section className="mx-20 mb-20">
+                </div>
+                <div className="mb-20">
                     <ul className="flex gap-2 border-b-2 border-transparent">
                         {view == View.NFTs &&
                             Object.keys(NFT_API)
@@ -115,8 +114,8 @@ const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
                                     );
                                 })}
                     </ul>
-                </section>
-                <div className="flex flex-col gap-5">
+                </div>
+                <div className="flex w-full flex-col gap-5">
                     <div className="flex gap-2">
                         <DropDown
                             menuOptions={[
@@ -169,10 +168,9 @@ const LeftPane = ({ view, api, setView, setApi, handleUpdateData }: Props) => {
                         </svg>
                     </button>
                 </div>
-
                 {/* <footer></footer> */}
             </div>
-        </>
+        </section>
     );
 };
 

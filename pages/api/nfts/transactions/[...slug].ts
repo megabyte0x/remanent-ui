@@ -13,16 +13,16 @@ export default async function handler(
         res.status(400);
         return;
     }
-    const chainId = slug[0];
+    const network = slug[0];
     const ownerAdd = slug[1];
-    // to handle undefined chainId or ownerAddress
-    if (!chainId || !ownerAdd) {
+    // to handle undefined network or ownerAddress
+    if (!network || !ownerAdd) {
         res.status(400);
         return;
     }
     const API_ENDPOINT =
         "https://remanent-api.vercel.app/v1/web3/nfts/transactions";
-    const url = `${API_ENDPOINT}/${chainId}/${ownerAdd}`;
+    const url = `${API_ENDPOINT}/${network}/${ownerAdd}`;
     try {
         const transactions = (await (
             await axios.get(url)
