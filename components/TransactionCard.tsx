@@ -31,6 +31,12 @@ const TransactionCard = ({ transaction }: Props) => {
             </a>
         );
     }
+
+    const processString = (str: string) => {
+        if (str.length < 45) return str;
+        return `${str.substring(0, 46)}...`;
+    };
+
     return (
         <div>
             <div
@@ -102,24 +108,33 @@ const TransactionCard = ({ transaction }: Props) => {
                                 <KeyValue
                                     keyValue="id"
                                     value={
-                                        transaction.id ? transaction.id : "null"
+                                        transaction.id
+                                            ? processString(transaction.id)
+                                            : "null"
                                     }
+                                    tooltip={transaction.id}
                                 />
                                 <KeyValue
                                     keyValue="nft_asset_id"
                                     value={
                                         transaction.nft_asset_id
-                                            ? transaction.nft_asset_id
+                                            ? processString(
+                                                  transaction.nft_asset_id
+                                              )
                                             : "null"
                                     }
+                                    tooltip={transaction.nft_asset_id}
                                 />
                                 <KeyValue
                                     keyValue="token_id"
                                     value={
                                         transaction.token_id
-                                            ? transaction.token_id
+                                            ? processString(
+                                                  transaction.token_id
+                                              )
                                             : "null"
                                     }
+                                    tooltip={transaction.token_id}
                                 />
                                 <KeyValue
                                     keyValue="contract"
@@ -208,9 +223,12 @@ const TransactionCard = ({ transaction }: Props) => {
                                     keyValue="marketplace"
                                     value={
                                         transaction.marketplace
-                                            ? transaction.marketplace
+                                            ? processString(
+                                                  transaction.marketplace
+                                              )
                                             : "null"
                                     }
+                                    tooltip={transaction.marketplace}
                                 />
                                 <KeyValue
                                     keyValue="price"
@@ -232,9 +250,12 @@ const TransactionCard = ({ transaction }: Props) => {
                                     keyValue="signature"
                                     value={
                                         transaction.signature
-                                            ? transaction.signature
+                                            ? processString(
+                                                  transaction.signature
+                                              )
                                             : "null"
                                     }
+                                    tooltip={transaction.signature}
                                 />
                                 <KeyValue
                                     keyValue="royalty"
@@ -291,6 +312,16 @@ const TransactionCard = ({ transaction }: Props) => {
                                 />
                             </div>
                         </div>
+                        <span
+                            className="absolute bottom-2 right-4 cursor-pointer text-xs text-blue-600 hover:underline"
+                            onClick={() => {
+                                navigator.clipboard.writeText(
+                                    JSON.stringify(transaction, null, "\t")
+                                );
+                            }}
+                        >
+                            Copy as JSON
+                        </span>
                     </div>
                 </div>
             )}

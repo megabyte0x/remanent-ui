@@ -5,13 +5,15 @@ type Props = {
     value: ReactNode;
     level?: number;
     className?: string;
+    tooltip?: string;
 };
 
 const KeyValue = ({
-    keyValue: key,
+    keyValue,
     value,
     level = 1,
     className = "",
+    tooltip,
 }: Props) => {
     return (
         <div
@@ -19,9 +21,9 @@ const KeyValue = ({
                 level == 2 ? "pl-8 text-xs " + className : className
             }`}
         >
-            <span className="font-semibold">{key}</span>
+            <span className="font-semibold">{keyValue}</span>
             <span className="ml-1 mr-3">:</span>
-            <span>{value}</span>
+            <span title={tooltip ? tooltip : keyValue}>{value}</span>
         </div>
     );
 };

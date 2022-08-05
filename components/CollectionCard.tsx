@@ -16,6 +16,10 @@ const CollectionCard = ({ collection }: Props) => {
             </a>
         );
     }
+    const processString = (str: string) => {
+        if (str.length < 45) return str;
+        return `${str.substring(0, 46)}...`;
+    };
     return (
         <div>
             <div
@@ -52,8 +56,11 @@ const CollectionCard = ({ collection }: Props) => {
                                 <KeyValue
                                     keyValue="id"
                                     value={
-                                        collection.id ? collection.id : "null"
+                                        collection.id
+                                            ? processString(collection.id)
+                                            : "null"
                                     }
+                                    tooltip={collection.id}
                                 />
                                 <KeyValue
                                     keyValue="chain"
@@ -134,17 +141,21 @@ const CollectionCard = ({ collection }: Props) => {
                                     keyValue="name"
                                     value={
                                         collection.name
-                                            ? collection.name
+                                            ? processString(collection.name)
                                             : "null"
                                     }
+                                    tooltip={collection.name}
                                 />
                                 <KeyValue
                                     keyValue="description"
                                     value={
                                         collection.description
-                                            ? collection.description
+                                            ? processString(
+                                                  collection.description
+                                              )
                                             : "null"
                                     }
+                                    tooltip={collection.description}
                                 />
                                 <KeyValue
                                     keyValue="logo_url"
@@ -272,10 +283,15 @@ const CollectionCard = ({ collection }: Props) => {
                                                                   keyValue="name"
                                                                   value={
                                                                       marketplace.name
-                                                                          ? marketplace.name
+                                                                          ? processString(
+                                                                                marketplace.name
+                                                                            )
                                                                           : "null"
                                                                   }
                                                                   className="pl-8"
+                                                                  tooltip={
+                                                                      marketplace.name
+                                                                  }
                                                               />
                                                               <KeyValue
                                                                   keyValue="url"
@@ -350,6 +366,16 @@ const CollectionCard = ({ collection }: Props) => {
                                 />
                             </div>
                         </div>
+                        <span
+                            className="absolute bottom-2 right-4 cursor-pointer text-xs text-blue-600 hover:underline"
+                            onClick={() => {
+                                navigator.clipboard.writeText(
+                                    JSON.stringify(collection, null, "\t")
+                                );
+                            }}
+                        >
+                            Copy as JSON
+                        </span>
                     </div>
                 </div>
             )}

@@ -16,6 +16,10 @@ const NFTCard = ({ nft }: Props) => {
             </a>
         );
     }
+    const processString = (str: string) => {
+        if (str.length < 45) return str;
+        return `${str.substring(0, 46)}...`;
+    };
     return (
         <div>
             <div
@@ -54,11 +58,19 @@ const NFTCard = ({ nft }: Props) => {
                             <div>
                                 <KeyValue
                                     keyValue="id"
-                                    value={nft.id ? nft.id : "null"}
+                                    value={
+                                        nft.id ? processString(nft.id) : "null"
+                                    }
+                                    tooltip={nft.id}
                                 />
                                 <KeyValue
                                     keyValue="token_id"
-                                    value={nft.token_id ? nft.token_id : "null"}
+                                    value={
+                                        nft.token_id
+                                            ? processString(nft.token_id)
+                                            : "null"
+                                    }
+                                    tooltip={nft.token_id}
                                 />
                                 <KeyValue
                                     keyValue="chain"
@@ -76,15 +88,21 @@ const NFTCard = ({ nft }: Props) => {
                                 />
                                 <KeyValue
                                     keyValue="name"
-                                    value={nft.name ? nft.name : "null"}
+                                    value={
+                                        nft.name
+                                            ? processString(nft.name)
+                                            : "null"
+                                    }
+                                    tooltip={nft.name}
                                 />
                                 <KeyValue
                                     keyValue="description"
                                     value={
                                         nft.description
-                                            ? nft.description
+                                            ? processString(nft.description)
                                             : "null"
                                     }
+                                    tooltip={nft.description}
                                 />
                                 <KeyValue
                                     keyValue="file_url"
@@ -110,19 +128,26 @@ const NFTCard = ({ nft }: Props) => {
                                                 keyValue="id"
                                                 value={
                                                     nft.collection.id
-                                                        ? nft.collection.id
+                                                        ? processString(
+                                                              nft.collection.id
+                                                          )
                                                         : "null"
                                                 }
                                                 className="pl-8"
+                                                tooltip={nft.collection.id}
                                             />
                                             <KeyValue
                                                 keyValue="name"
                                                 value={
                                                     nft.collection.name
-                                                        ? nft.collection.name
+                                                        ? processString(
+                                                              nft.collection
+                                                                  .name
+                                                          )
                                                         : "null"
                                                 }
                                                 className="pl-8"
+                                                tooltip={nft.collection.name}
                                             />
                                             <KeyValue
                                                 keyValue="contract_address"
@@ -229,6 +254,16 @@ const NFTCard = ({ nft }: Props) => {
                                 />
                             </div>
                         </div>
+                        <span
+                            className="absolute bottom-2 right-4 cursor-pointer text-xs text-blue-600 hover:underline"
+                            onClick={() => {
+                                navigator.clipboard.writeText(
+                                    JSON.stringify(nft, null, "\t")
+                                );
+                            }}
+                        >
+                            Copy as JSON
+                        </span>
                     </div>
                 </div>
             )}
