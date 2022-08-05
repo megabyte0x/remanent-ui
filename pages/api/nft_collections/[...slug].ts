@@ -13,16 +13,16 @@ export default async function handler(
         res.status(400);
         return;
     }
-    const chainId = slug[0];
+    const network = slug[0];
     const contractAddr = slug[1];
-    // to handle undefined chainId or contractAddr
-    if (!chainId || !contractAddr) {
+    // to handle undefined network or contractAddr
+    if (!network || !contractAddr) {
         res.status(400);
         return;
     }
     const API_ENDPOINT =
         "https://remanent-api.vercel.app/v1/web3/nft_collections";
-    const url = `${API_ENDPOINT}/${chainId}/${contractAddr}`;
+    const url = `${API_ENDPOINT}/${network}/${contractAddr}`;
     try {
         const collections = (await (await axios.get(url)).data) as Collection[];
         res.status(200).json(collections);
