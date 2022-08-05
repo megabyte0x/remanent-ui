@@ -36,8 +36,8 @@ const CollectionCard = ({ collection }: Props) => {
                 <span>{collection.description}</span>
             </div>
             {popup && (
-                <div className="fixed top-0 left-0 z-50 flex h-screen w-full items-center justify-center overflow-scroll overscroll-none text-sm backdrop-blur-sm">
-                    <div className="relative flex w-1/2 flex-col rounded-lg bg-white shadow-2xl">
+                <div className="fixed top-0 left-0 z-50 m-3 flex h-screen w-full items-center justify-center overflow-scroll overscroll-none text-sm backdrop-blur-sm">
+                    <div className="relative flex flex-col rounded-lg bg-white px-10 shadow-2xl">
                         <button
                             type="button"
                             className="absolute top-2 right-4 self-end font-mono text-lg font-bold text-gray-500 hover:text-gray-700"
@@ -47,7 +47,7 @@ const CollectionCard = ({ collection }: Props) => {
                         >
                             x
                         </button>
-                        <div className="my-10 flex justify-evenly">
+                        <div className="my-10 grid grid-cols-1 gap-x-10 xl:grid-cols-2">
                             <div>
                                 <KeyValue
                                     keyValue="id"

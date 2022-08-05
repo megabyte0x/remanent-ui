@@ -112,7 +112,7 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head> */}
 
-            <main className="grid grid-cols-2 gap-x-10 xl:grid-cols-3">
+            <main className="grid grid-cols-2 gap-x-5 xl:grid-cols-3 xl:gap-x-10">
                 <LeftPane
                     view={view}
                     api={api}

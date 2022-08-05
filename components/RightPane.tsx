@@ -7,7 +7,7 @@ type Props = {
 const RightPane = ({ children }: Props) => {
     const { loading } = useLoadingContext();
     return (
-        <div className="col-span-1 min-h-screen w-full pr-10 xl:col-span-2">
+        <div className="col-span-1 min-h-screen w-full pr-5 xl:col-span-2 xl:pr-10">
             {loading ? (
                 <div className="flex h-full w-full items-center justify-center gap-1 text-6xl">
                     <span className="animate-bounce-medium">.</span>
