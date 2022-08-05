@@ -9,10 +9,14 @@ const NFTs_Collections = ({ collections }: Props) => {
     return (
         <div className="mb-10 flex flex-col">
             <div className="sticky top-0 z-10 h-5 bg-teal-50 xl:h-10"></div>
-            <div className="gap-52rounded-md sticky top-5 z-10 mb-8 grid grid-cols-1 bg-gradient-to-t from-teal-50/75 via-teal-400/90 to-teal-400/100 p-3 backdrop-blur-lg xl:top-10 xl:grid-cols-2 xl:gap-10 xl:p-8">
+            <div className="sticky top-5 z-10 mb-8 grid grid-cols-1 gap-5 rounded-md bg-gradient-to-t from-teal-50/75 via-teal-400/90 to-teal-400/100 p-3 backdrop-blur-lg xl:top-10 xl:grid-cols-2 xl:gap-10 xl:p-8">
                 <img
                     className="col-span-1 h-full w-full rounded-md"
-                    src={collections[0].banner_url}
+                    src={
+                        collections[0].banner_url
+                            ? collections[0].banner_url
+                            : "/img_not_found.png"
+                    }
                     alt={collections[0].name}
                 />
                 <div className="flex gap-3 pt-5 xl:flex-col">

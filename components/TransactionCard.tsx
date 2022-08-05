@@ -92,7 +92,7 @@ const TransactionCard = ({ transaction }: Props) => {
                 </span>
             </div>
             {popup && (
-                <div className="fixed top-0 left-0 z-50 m-3 flex h-screen w-full items-center justify-center overflow-scroll overscroll-none text-sm backdrop-blur-sm">
+                <div className="fixed top-0 left-0 z-50 flex h-screen w-full items-center justify-center overflow-scroll overscroll-none px-3 text-sm backdrop-blur">
                     <div className="relative flex flex-col rounded-lg bg-white px-10 shadow-2xl">
                         <button
                             type="button"
@@ -313,7 +313,7 @@ const TransactionCard = ({ transaction }: Props) => {
                             </div>
                         </div>
                         <span
-                            className="absolute bottom-2 right-4 cursor-pointer text-xs text-blue-600 hover:underline"
+                            className="absolute bottom-3 right-4 cursor-pointer text-xs font-semibold text-blue-600 hover:underline"
                             onClick={() => {
                                 navigator.clipboard.writeText(
                                     JSON.stringify(transaction, null, "\t")

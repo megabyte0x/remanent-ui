@@ -32,7 +32,11 @@ const CollectionCard = ({ collection }: Props) => {
                 <div className="flex w-full justify-center overflow-hidden rounded-md object-contain">
                     <img
                         className="h-full w-full transition-transform duration-300 ease-in-out group-hover:scale-110"
-                        src={collection.banner_url}
+                        src={
+                            collection.banner_url
+                                ? collection.banner_url
+                                : "/img_not_found.png"
+                        }
                         alt={collection.name}
                     />
                 </div>
@@ -40,7 +44,7 @@ const CollectionCard = ({ collection }: Props) => {
                 <span>{collection.description}</span>
             </div>
             {popup && (
-                <div className="fixed top-0 left-0 z-50 m-3 flex h-screen w-full items-center justify-center overflow-scroll overscroll-none text-sm backdrop-blur-sm">
+                <div className="fixed top-0 left-0 z-50 flex h-screen w-full items-center justify-center overflow-scroll overscroll-none px-3 text-sm backdrop-blur">
                     <div className="relative flex flex-col rounded-lg bg-white px-10 shadow-2xl">
                         <button
                             type="button"
@@ -367,7 +371,7 @@ const CollectionCard = ({ collection }: Props) => {
                             </div>
                         </div>
                         <span
-                            className="absolute bottom-2 right-4 cursor-pointer text-xs text-blue-600 hover:underline"
+                            className="absolute bottom-3 right-4 cursor-pointer text-xs font-semibold text-blue-600 hover:underline"
                             onClick={() => {
                                 navigator.clipboard.writeText(
                                     JSON.stringify(collection, null, "\t")
