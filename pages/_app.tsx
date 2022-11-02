@@ -7,20 +7,20 @@ import AddressContext from "../contexts/Address";
 import NetworkContext from "../contexts/Network";
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const [address, setAddress] = useState(
-        "0xDBfD76AF2157Dc15eE4e57F3f942bB45Ba84aF24"
-    );
-    const [network, setNetwork] = useState(Network.ETHEREUM);
-    const [loading, setLoading] = useState(false);
-    return (
-        <LoadingContext.Provider value={{ loading, setLoading }}>
-            <AddressContext.Provider value={{ address, setAddress }}>
-                <NetworkContext.Provider value={{ network, setNetwork }}>
-                    <Component {...pageProps} />
-                </NetworkContext.Provider>
-            </AddressContext.Provider>
-        </LoadingContext.Provider>
-    );
+  const [address, setAddress] = useState(
+    "0x2D2E4c335EEE674Bd8F2EB3622E4156EbAbC864d"
+  );
+  const [network, setNetwork] = useState(Network.ETHEREUM);
+  const [loading, setLoading] = useState(false);
+  return (
+    <LoadingContext.Provider value={{ loading, setLoading }}>
+      <AddressContext.Provider value={{ address, setAddress }}>
+        <NetworkContext.Provider value={{ network, setNetwork }}>
+          <Component {...pageProps} />
+        </NetworkContext.Provider>
+      </AddressContext.Provider>
+    </LoadingContext.Provider>
+  );
 }
 
 export default MyApp;
